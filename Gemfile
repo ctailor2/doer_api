@@ -13,7 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc # bundle exec rake doc:rails generates the A
 gem 'annotate', '~> 2.6.0' # Annotate schema on models and model spec files
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   gem 'pry-byebug' # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
