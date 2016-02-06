@@ -15,5 +15,6 @@
 #
 
 class ClientToken < ActiveRecord::Base
+  include Token
 end
 
