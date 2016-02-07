@@ -5,6 +5,7 @@ gem 'rails', '4.2.3'
 gem 'pg' # Use postgresql as the database for Active Record
 
 gem 'grape' # Use grape DSL for API development
+gem 'grape-entity' # Use grape entities for restful object representation
 gem 'hashie-forbidden_attributes' # Disable strong params to use Grape's param validation
 
 gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease
