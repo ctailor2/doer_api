@@ -7,6 +7,7 @@ gem 'pg' # Use postgresql as the database for Active Record
 gem 'grape' # Use grape DSL for API development
 gem 'grape-entity' # Use grape entities for restful object representation
 gem 'hashie-forbidden_attributes' # Disable strong params to use Grape's param validation
+gem 'rack-cors' # Use CORS
 
 gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease
 gem 'sdoc', '~> 0.4.0', group: :doc # bundle exec rake doc:rails generates the API under doc/api.
