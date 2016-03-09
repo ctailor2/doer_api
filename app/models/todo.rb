@@ -15,4 +15,8 @@
 
 class Todo < ActiveRecord::Base
   belongs_to :user
+
+  class Entity < Grape::Entity
+    expose :task
+  end
 end
