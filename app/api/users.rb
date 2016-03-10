@@ -22,8 +22,13 @@ class Users < Base
     end
     post :login do
       user = User.find_by_email!(declared(params).user.email)
-      session_token = user.session_tokens.active.last || user.session_tokens.create!
-      present session_token
+      if user.authenticate(declared(params).user.password)
+        session_token = user.session_tokens.active.last || user.session_tokens.create!
+        present session_token
+      else
+        # Need to handle this scenario more elegantly
+        error!('500 Fatal Error', 500)
+      end
     end
   end
 end
