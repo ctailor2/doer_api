@@ -16,9 +16,7 @@
 class Todo < ActiveRecord::Base
   belongs_to :user
 
-  alias_method :saved, :persisted?
-
   class Entity < Grape::Entity
-    expose :task, :saved
+    expose :id, :task
   end
 end
