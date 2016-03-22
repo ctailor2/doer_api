@@ -6,7 +6,7 @@ require 'rack/cors'
 use Rack::Cors do
   allow do
     origins 'localhost:3000'
-    resource '*', headers: :any, methods: [:get, :post]
+    resource '*', headers: :any, methods: [:get, :post, :put, :delete]
   end
 end
 

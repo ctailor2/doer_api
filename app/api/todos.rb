@@ -18,6 +18,13 @@ class Todos < Base
     post :create do
       present current_user.todos.create!(declared(params).todo)
     end
+
+    route_param :id do
+      desc 'destroy todo'
+      delete do
+        present current_user.todos.find(params[:id]).destroy
+      end
+    end
   end
 end
 
