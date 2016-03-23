@@ -4,6 +4,7 @@
 #
 #  created_at :datetime         not null
 #  id         :integer          not null, primary key
+#  position   :integer          not null
 #  task       :string           not null
 #  updated_at :datetime         not null
 #  user_id    :integer          not null

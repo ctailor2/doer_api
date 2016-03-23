@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :session_tokens
-  has_many :todos
+  has_many :todos, -> { order(position: :asc) }
 
   validates :email, uniqueness: true
 end
