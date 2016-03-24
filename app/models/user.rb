@@ -20,4 +20,6 @@ class User < ActiveRecord::Base
   has_many :todos, -> { order(position: :asc) }
 
   validates :email, uniqueness: true
+
+  accepts_nested_attributes_for :todos, update_only: true
 end

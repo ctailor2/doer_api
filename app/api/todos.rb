@@ -19,6 +19,18 @@ class Todos < Base
       present current_user.todos.create!(declared(params).todo)
     end
 
+    desc 'update todo positions'
+    params do
+      requires :todos_attributes, type: Array do
+        requires :id, type: Integer
+        requires :position, type: Integer
+      end
+    end
+    put :update_positions do
+      current_user.update_attributes(declared(params))
+      present current_user.todos
+    end
+
     route_param :id do
       desc 'destroy todo'
       delete do
