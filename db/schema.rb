@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323215305) do
+ActiveRecord::Schema.define(version: 20160327182515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,11 +38,13 @@ ActiveRecord::Schema.define(version: 20160323215305) do
   add_index "session_tokens", ["user_id"], name: "index_session_tokens_on_user_id", using: :btree
 
   create_table "todos", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.string   "task",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "position",   null: false
+    t.integer  "user_id",                    null: false
+    t.string   "task",                       null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "position"
+    t.boolean  "completed",  default: false, null: false
+    t.boolean  "active",     default: false, null: false
   end
 
   add_index "todos", ["user_id"], name: "index_todos_on_user_id", using: :btree

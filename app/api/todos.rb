@@ -13,6 +13,7 @@ class Todos < Base
     params do
       requires :todo, type: Hash do
         requires :task, type: String
+        requires :active, type: Boolean
       end
     end
     post :create do

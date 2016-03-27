@@ -2,12 +2,14 @@
 #
 # Table name: todos
 #
-#  created_at :datetime         not null
 #  id         :integer          not null, primary key
-#  position   :integer          not null
-#  task       :string           not null
-#  updated_at :datetime         not null
 #  user_id    :integer          not null
+#  task       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  position   :integer
+#  completed  :boolean          default(FALSE), not null
+#  active     :boolean          default(FALSE), not null
 #
 # Indexes
 #
