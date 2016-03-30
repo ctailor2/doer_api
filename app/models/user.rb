@@ -22,4 +22,8 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   accepts_nested_attributes_for :todos, update_only: true
+
+  class Entity < Grape::Entity
+    expose :email
+  end
 end

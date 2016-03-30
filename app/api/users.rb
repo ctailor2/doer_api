@@ -13,7 +13,7 @@ class Users < Base
       present user.session_tokens.create!
     end
 
-    desc 'user registration'
+    desc 'user login'
     params do
       requires :user, type: Hash do
         requires :email, type: String
@@ -29,6 +29,11 @@ class Users < Base
         # Need to handle this scenario more elegantly
         error!('500 Fatal Error', 500)
       end
+    end
+
+    desc 'user show'
+    get :show do
+      present current_user
     end
   end
 end
