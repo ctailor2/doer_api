@@ -25,5 +25,6 @@ class User < ActiveRecord::Base
 
   class Entity < Grape::Entity
     expose :email
+    expose :todos, using: Todo::Entity
   end
 end
