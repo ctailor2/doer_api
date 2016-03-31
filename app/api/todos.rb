@@ -33,6 +33,18 @@ class Todos < Base
     end
 
     route_param :id do
+      desc 'update todo'
+      params do
+        requires :todo, type: Hash do
+          requires :id, type: Integer
+          requires :completed, type: Boolean
+        end
+      end
+      put do
+        todo = current_user.todos.find(params[:id])
+        present todo.update_attributes!(declared(params).todo)
+      end
+
       desc 'destroy todo'
       delete do
         present current_user.todos.find(params[:id]).destroy
