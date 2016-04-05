@@ -26,6 +26,7 @@ class Todos < Base
         requires :todo, type: Hash do
           optional :completed, type: Boolean
           optional :position, type: Integer
+          optional :active, type: Boolean
         end
       end
       put do
