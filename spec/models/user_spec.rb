@@ -6,6 +6,7 @@
 #  email           :string           not null
 #  id              :integer          not null, primary key
 #  password_digest :string           not null
+#  timezone        :string           default("Etc/UTC"), not null
 #  updated_at      :datetime         not null
 #
 # Indexes

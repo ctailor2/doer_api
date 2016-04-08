@@ -2,11 +2,12 @@
 #
 # Table name: users
 #
-#  created_at      :datetime         not null
-#  email           :string           not null
 #  id              :integer          not null, primary key
+#  email           :string           not null
 #  password_digest :string           not null
+#  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  timezone        :string           default("Etc/UTC"), not null
 #
 # Indexes
 #
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   class Entity < Grape::Entity
-    expose :email
+    expose :email, :timezone
     expose :todos, using: Todo::Entity
   end
 end
