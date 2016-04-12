@@ -35,6 +35,16 @@ class Users < Base
     get :show do
       present current_user
     end
+
+    desc 'user update'
+    params do
+      requires :user, type: Hash do
+        optional :timezone, type: String
+      end
+    end
+    put :update do
+      present current_user.update_attributes!(declared(params).user)
+    end
   end
 end
 
