@@ -20,6 +20,8 @@ class Todo < ActiveRecord::Base
   belongs_to :user
   acts_as_list scope: :user, top_of_list: 0, add_new_at: nil
 
+  scope :completed, -> { where(completed: true) }
+
   class Entity < Grape::Entity
     expose :id, :task, :position, :active, :completed
   end

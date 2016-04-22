@@ -22,8 +22,21 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
 
+  def count_of_todos_completed_today
+    # This adds some weight to the initial page load
+    # I wonder if shipping it off to a diff API call makes sense
+    today = DateTime.now.utc.in_time_zone(timezone).to_date
+    # Using updated at may not be the most accurate if todos can be uncompleted.
+    # Maybe now is the time to consider adding a grace period with undo feature.
+    todos.completed.where('(updated_at::timestamptz AT TIME ZONE ?)::date = ?', timezone, today).count
+  end
+
   class Entity < Grape::Entity
     expose :email, :timezone
+    # Don't always need todos either (i.e. settings page) so maybe that should
+    # be separate?
     expose :todos, using: Todo::Entity
+
+    expose :count_of_todos_completed_today, as: :completed
   end
 end
