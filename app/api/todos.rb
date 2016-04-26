@@ -20,6 +20,18 @@ class Todos < Base
       present current_user.todos.create!(declared(params).todo)
     end
 
+    desc 'bulk update todos'
+    params do
+      requires :todos_attributes, type: Array do
+        requires :id, type: Integer
+        optional :position, type: Integer
+        optional :active, type: Boolean
+      end
+    end
+    put :bulk_update do
+      present current_user.update_attributes!(declared(params))
+    end
+
     route_param :id do
       desc 'update todo'
       params do
