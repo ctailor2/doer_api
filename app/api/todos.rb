@@ -4,11 +4,6 @@ class Todos < Base
       authenticate!
     end
 
-    desc 'todos list'
-    get :index do
-      present current_user.todos
-    end
-
     desc 'create todo'
     params do
       requires :todo, type: Hash do
