@@ -35,10 +35,10 @@ class User < ActiveRecord::Base
 
   class Entity < Grape::Entity
     expose :email, :timezone
-    # Don't always need todos either (i.e. settings page) so maybe that should
-    # be separate?
-    expose :todos, using: Todo::Entity
-
+    expose :todos, using: Todo::Entity, if: -> (instance, options) do
+      with_assocs = options['with_assocs']
+      with_assocs && with_assocs.include?('todos')
+    end
     expose :count_of_todos_completed_today, as: :completed
   end
 end

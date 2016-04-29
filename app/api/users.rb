@@ -32,8 +32,11 @@ class Users < Base
     end
 
     desc 'user show'
+    params do
+      optional :with_assocs, type: Array[String]
+    end
     get :show do
-      present current_user
+      present current_user, { with: User::Entity }.merge(params)
     end
 
     desc 'user update'
