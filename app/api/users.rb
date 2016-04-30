@@ -10,6 +10,7 @@ class Users < Base
     end
     post :signup do
       user = User.create!(declared(params).user)
+      user.create_goal_setting
       present user.session_tokens.create!
     end
 
