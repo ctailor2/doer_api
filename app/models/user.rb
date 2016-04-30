@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   has_many :session_tokens
   has_many :todos, -> { order(position: :asc) }
 
+  has_one :goal_setting, class_name: 'Setting::Goal'
+
   validates :email, uniqueness: true
 
   accepts_nested_attributes_for :todos, update_only: true
@@ -39,6 +41,7 @@ class User < ActiveRecord::Base
       with_assocs = options['with_assocs']
       with_assocs && with_assocs.include?('todos')
     end
+    expose :goal_setting, using: Setting::Goal::Entity, as: :goal_setting_attributes
     expose :count_of_todos_completed_today, as: :completed
   end
 end

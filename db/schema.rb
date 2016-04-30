@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408015647) do
+ActiveRecord::Schema.define(version: 20160430001308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 20160408015647) do
   add_index "session_tokens", ["token"], name: "index_session_tokens_on_token", unique: true, using: :btree
   add_index "session_tokens", ["user_id"], name: "index_session_tokens_on_user_id", using: :btree
 
+  create_table "setting_goals", force: :cascade do |t|
+    t.integer  "user_id",                null: false
+    t.integer  "target",     default: 2, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "setting_goals", ["user_id"], name: "index_setting_goals_on_user_id", using: :btree
+
   create_table "todos", force: :cascade do |t|
     t.integer  "user_id",                    null: false
     t.string   "task",                       null: false
@@ -60,5 +69,6 @@ ActiveRecord::Schema.define(version: 20160408015647) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "session_tokens", "users"
+  add_foreign_key "setting_goals", "users"
   add_foreign_key "todos", "users"
 end
