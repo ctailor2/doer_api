@@ -44,6 +44,9 @@ class Users < Base
     params do
       requires :user, type: Hash do
         optional :timezone, type: String
+        optional :goal_setting_attributes, type: Hash do
+          requires :target, type: Integer
+        end
       end
     end
     put :update do

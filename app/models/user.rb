@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   accepts_nested_attributes_for :todos, update_only: true
+  accepts_nested_attributes_for :goal_setting, update_only: true
 
   def count_of_todos_completed_today
     # This adds some weight to the initial page load
