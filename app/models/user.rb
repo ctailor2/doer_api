@@ -42,7 +42,10 @@ class User < ActiveRecord::Base
       with_assocs = options['with_assocs']
       with_assocs && with_assocs.include?('todos')
     end
-    expose :goal_setting, using: Setting::Goal::Entity, as: :goal_setting_attributes
+    expose :goal_setting, using: Setting::Goal::Entity, as: :goal_setting_attributes, if: -> (instance, options) do
+      with_assocs = options['with_assocs']
+      with_assocs && with_assocs.include?('goal_setting')
+    end
     expose :count_of_todos_completed_today, as: :completed
   end
 end
