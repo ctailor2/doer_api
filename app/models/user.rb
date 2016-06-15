@@ -46,6 +46,6 @@ class User < ActiveRecord::Base
       with_assocs = options['with_assocs']
       with_assocs && with_assocs.include?('goal_setting')
     end
-    expose :count_of_todos_completed_today, as: :completed
+    expose :count_of_todos_completed_today
   end
 end
