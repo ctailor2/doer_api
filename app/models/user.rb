@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     todos.completed.where('(updated_at::timestamptz AT TIME ZONE ?)::date = ?', timezone, today).count
   end
 
+  def count_of_active_todos
+    todos.active.not_completed.count
+  end
+
   class Entity < Grape::Entity
     expose :email, :timezone
     expose :todos, using: Todo::Entity, if: -> (instance, options) do
@@ -47,5 +51,6 @@ class User < ActiveRecord::Base
       with_assocs && with_assocs.include?('goal_setting')
     end
     expose :count_of_todos_completed_today
+    expose :count_of_active_todos
   end
 end
