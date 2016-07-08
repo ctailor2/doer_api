@@ -19,10 +19,19 @@ class Users < Base
         optional :goal_setting_attributes, type: Hash do
           requires :target, type: Integer
         end
+        optional :pipeline_setting_attributes, type: Hash do
+          requires :days_between_views, type: Integer
+        end
       end
     end
     put :update do
-      present current_user.update_attributes!(declared(params).user)
+      present current_user.update_attributes!(declared(params, include_missing: false).user)
+    end
+
+    desc 'user view pipeline'
+    put :view_pipeline do
+      current_user.pipeline_setting.mark_as_viewed!
+      present current_user
     end
   end
 end

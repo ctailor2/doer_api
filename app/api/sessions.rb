@@ -28,6 +28,7 @@ class Sessions < Base
   post :signup do
     user = User.create!(declared(params).user)
     user.create_goal_setting
+    user.create_pipeline_setting
     present user.session_tokens.create!
   end
 end
