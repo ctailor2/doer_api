@@ -33,9 +33,16 @@ class Setting::Pipeline < ActiveRecord::Base
   private
 
   def restrict_viewing
-    if last_viewed_at_changed? && cannot_view?
+    if last_viewed_at_changed? && view_diffs_meet_requirement?(*changes[:last_viewed_at])
       errors[:last_viewed_at] << 'cannot be updated when the pipeline cannot be viewed'
     end
+  end
+
+  def view_diffs_meet_requirement?(prev_viewed_at, new_viewed_at)
+    user_timezone = ActiveSupport::TimeZone[user.timezone]
+    new_viewed_at_date = user_timezone.at(new_viewed_at.to_i).to_date
+    prev_viewed_at_date = user_timezone.at(prev_viewed_at.to_i).to_date
+    new_viewed_at_date - prev_viewed_at_date < days_between_views
   end
 
   class Entity < Grape::Entity
